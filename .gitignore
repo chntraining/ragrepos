@@ -1,0 +1,44 @@
+# Dinesh AI Academy · Agentic Engineering Kit
+
+# Generated applications — never pushed (only the explainer README is kept)
+projects/*
+!projects/README.md
+
+# Secrets (every .env anywhere; templates are allowed)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Local data and work folders
+data/
+**/data/
+evals/.work/
+perf/.work/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+coverage/
+playwright-report/
+test-results/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.obsidian/
+.claude/settings.local.json

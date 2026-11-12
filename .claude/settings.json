@@ -1,0 +1,67 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest:*)",
+      "Bash(python -m py_compile:*)",
+      "Bash(pip install -r requirements.txt)",
+      "Bash(pip show:*)",
+      "Bash(pip list:*)",
+      "Bash(python --version)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ],
+    "ask": [
+      "Bash(python evals/run_eval.py:*)",
+      "Bash(python projects/*/evals/run_eval.py:*)",
+      "Bash(cd * && python evals/run_eval.py:*)",
+      "Bash(git push:*)",
+      "Bash(git tag:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Edit(./.env)",
+      "Write(./.env)",
+      "Read(./projects/**/.env)",
+      "Edit(./projects/**/.env)",
+      "Write(./projects/**/.env)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/session_start.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect_secrets.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/check_python.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

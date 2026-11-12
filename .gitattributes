@@ -1,0 +1,5 @@
+# Dinesh AI Academy · Agentic Engineering Kit — consistent line endings on Windows, macOS and Linux
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
